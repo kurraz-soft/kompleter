@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kompleter Settings</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <span class="logo">✦</span>
+    <h1>Kompleter</h1>
+  </div>
+
+  <!-- Per-site section -->
+  <div class="site-bar">
+    <div class="site-info">
+      <span class="site-hostname" id="siteHostname">—</span>
+      <span class="site-label">current site</span>
+    </div>
+    <label class="toggle" title="Enable Kompleter on this site">
+      <input type="checkbox" id="siteEnabled" />
+      <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      <span class="toggle-label" id="toggleLabel">Disabled</span>
+    </label>
+  </div>
+
+  <div class="site-content">
+    <div class="field">
+      <label for="contextSelector">
+        Context Selector
+        <span class="hint">per-site · optional</span>
+      </label>
+      <input type="text" id="contextSelector" placeholder="#chat  (leave empty for auto-detect)" autocomplete="off" />
+      <span class="field-hint">
+        Auto-mode collects 3000 chars of DOM text above the input.
+        Set a CSS selector to target a specific element (e.g. <code>#chat</code> for SillyTavern).
+      </span>
+    </div>
+  </div>
+
+  <div class="section-divider">Global settings</div>
+
+  <div class="content">
+    <!-- API Key -->
+    <div class="field">
+      <label for="apiKey">OpenRouter API Key</label>
+      <div class="input-row">
+        <input type="password" id="apiKey" placeholder="sk-or-..." autocomplete="off" />
+        <button class="icon-btn" id="toggleKey" title="Show/hide key">👁</button>
+      </div>
+      <a class="hint-link" href="https://openrouter.ai/keys" target="_blank">
+        Get an API key →
+      </a>
+    </div>
+
+    <!-- Model -->
+    <div class="field">
+      <label>Model</label>
+      <div class="model-picker">
+        <div class="model-search-row">
+          <input type="text" id="modelSearch" placeholder="Search models…" autocomplete="off" />
+          <button class="icon-btn" id="refreshModels" title="Refresh model list">⟳</button>
+        </div>
+        <div class="model-list-wrap">
+          <div id="modelList" class="model-list"></div>
+        </div>
+        <div id="modelStatus" class="model-status">Loading models…</div>
+        <div class="model-selected-row">
+          Selected: <code id="modelSelectedId">—</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temperature -->
+    <div class="field">
+      <label for="temperature">
+        Temperature
+        <span class="value-badge" id="tempValue">0.3</span>
+      </label>
+      <input type="range" id="temperature" min="0" max="2" step="0.05" value="0.3" />
+      <div class="range-labels"><span>0 (precise)</span><span>2 (creative)</span></div>
+    </div>
+
+    <!-- Max tokens -->
+    <div class="field">
+      <label for="maxTokens">Max Response Tokens</label>
+      <input type="number" id="maxTokens" min="10" max="4096" step="10" value="150" />
+    </div>
+
+    <!-- Main prompt -->
+    <div class="field">
+      <label for="mainPrompt">
+        Main Prompt
+        <span class="hint"><code>{{context_string}}</code> · <code>{{page_context}}</code></span>
+      </label>
+      <textarea id="mainPrompt" rows="7" spellcheck="false"></textarea>
+      <button class="text-btn" id="resetPrompt">Reset to default</button>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <span class="saved-msg hidden" id="savedMsg">✓ Saved</span>
+      <button class="btn-save" id="saveBtn">Save settings</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    Press <kbd>Ctrl+Space</kbd> in any text field to autocomplete.
+    Press <kbd>Tab</kbd> to accept.
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
