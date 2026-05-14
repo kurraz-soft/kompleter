@@ -265,13 +265,27 @@
     ghostEl = el;
   }
 
-  function showError(input, msg) {
-    const rect = input.getBoundingClientRect();
+  function showError(_input, msg) {
     const el = document.createElement('div');
     el.className = 'kompleter-error';
     el.textContent = '⚠ ' + msg;
-    el.style.top  = (rect.bottom + 4) + 'px';
-    el.style.left = rect.left + 'px';
+    Object.assign(el.style, {
+      position:   'fixed',
+      top:        '50%',
+      left:       '50%',
+      transform:  'translate(-50%, -50%)',
+      zIndex:     '2147483647',
+      fontSize:   '12px',
+      fontFamily: 'system-ui, sans-serif',
+      background: '#fff0f0',
+      border:     '1px solid #f88',
+      borderRadius: '4px',
+      padding:    '4px 8px',
+      color:      '#c00',
+      maxWidth:   '320px',
+      pointerEvents: 'none',
+      boxShadow:  '0 2px 6px rgba(0,0,0,0.15)',
+    });
     document.body.appendChild(el);
     ghostEl = el;
     setTimeout(dismiss, 5000);
