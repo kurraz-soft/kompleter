@@ -4,8 +4,7 @@ const DEFAULT_PROMPT =
   "Return ONLY the completion — the part that comes AFTER the existing text — " +
   "with no explanation, no quotes, and no repetition of the input. " +
   "If the text appears complete, return an empty string.\n\n" +
-  "{{page_context}}" +
-  "Text to complete:\n```\n{{context_string}}\n```";
+  "Text to complete:\n```\n{{page_context}}\n{{context_string}}\n```";
 
 const DEFAULTS = {
   apiKey: "",
